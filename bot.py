@@ -34,7 +34,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 # ============================================================
 # НАСТРОЙКИ ПАРТНЕРСКОГО БОТА (@aipredictor_signals)
 # ============================================================
-PARTNER_BOT_TOKEN = "9059976355:AAH6_pdidfSeGiPMpJK97KSxbPyz0RhfVDg"
+PARTNER_BOT_TOKEN = "9059976355:AAFQ7sCUcdSH7wJtHdG4DxbvW8hht5Z0fKU"
 ADMIN_ID = "6109042131" 
 
 # Твои ссылки на игровые боты
@@ -169,7 +169,6 @@ async def cmd_start(message: types.Message, command: CommandObject):
                 await bot.send_message(ADMIN_ID, f"🆕 <b>НОВЫЙ ТРАФЕР ЗАШЕЛ!</b>\n\n👤 Имя: {message.from_user.first_name}\n🔗 Юзернейм: @{uname}\n🆔 ID: <code>{uid}</code>")
                 
                 if ref_id:
-                    # Фишка: Красивое уведомление пригласившему
                     await bot.send_message(
                         ref_id, 
                         f"🔥 <b>ПО ТВОЕЙ ССЫЛКЕ ЗАЛЕТЕЛ НОВЫЙ ТРАФЕР!</b>\n\n"
@@ -179,7 +178,6 @@ async def cmd_start(message: types.Message, command: CommandObject):
                     )
             except Exception: pass
 
-    # Фишка: Мощное приветствие, продающее пассивный доход
     await message.answer(
         "🔥 <b>ДОБРО ПОЖАЛОВАТЬ В ЭЛИТНУЮ ПАРТНЕРСКУЮ КОМАНДУ!</b>\n\n"
         "Здесь ты не просто льёшь трафик. Ты строишь свою <b>собственную сеть</b>.\n\n"
@@ -217,7 +215,6 @@ async def partner_invite_trafficker(message: types.Message):
 @dp.message(F.text == "👑 Топ траферов")
 async def partner_leaderboard(message: types.Message):
     with get_db() as conn:
-        # Ищем топ-5 траферов по количеству приглашенных
         top = conn.execute("""
             SELECT referrer_id, COUNT(*) as ref_count 
             FROM partners 
@@ -292,7 +289,7 @@ async def admin_reply_handler(message: types.Message):
                 await message.answer(f"❌ Не удалось отправить сообщение. Ошибка: {e}")
 
 # ============================================================
-# КРЕАТИВЫ И ВЫВОД (Без изменений, но с кнопками в меню)
+# КРЕАТИВЫ И ВЫВОД
 # ============================================================
 @dp.message(F.text == "📤 Предложить креатив")
 async def suggest_creative(message: types.Message, state: FSMContext):
